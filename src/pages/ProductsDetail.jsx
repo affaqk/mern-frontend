@@ -6,15 +6,15 @@ const ProductsDetail = () => {
     const { id } = useParams()
     console.log(id);
 
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState();
+    console.log(product);
+    
 
     const getProductDetail = async () => {
         try {
             const response = await axios.get(`http://localhost:3000/api/v1/products/product-detail/${id}`)
             // console.log(response.data.product);
             setProduct(response.data.product)
-
-
         } catch (error) {
             console.log(error);
 
