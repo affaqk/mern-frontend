@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie"
+import { toast } from 'react-toastify';
 
 const Login = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -12,10 +15,14 @@ const Login = () => {
         try {
             console.log(email, password);
             const response = await axios.post("http://localhost:3000/api/v1/users/login-user", formData);
-            console.log(response);
-            console.log("data sent sucessfully");
+            const token = response.data.token;
+            Cookies.set("token", token , {
+                expires : 7
+            })
+            toast.success("loggedin successfully")
+            navigate("/")
         } catch (error) {
-            console.log(error);
+            toast.error(error.response.data.message);
         }
     }
 
