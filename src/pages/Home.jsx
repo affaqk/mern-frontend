@@ -15,7 +15,6 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
-  const [maxPrice, setMaxPrice] = useState(10000);
 
   const getAllProducts = async () => {
     try {
@@ -26,9 +25,7 @@ const Home = () => {
       if (category && category !== "All") {
         url += `category=${category}&`;
       }
-    //   if (maxPrice) {
-    //     url += `price[lte]=${maxPrice}`;
-    //   }
+
       const response = await axios.get(url);
       setProducts(response.data.products);
     } catch (error) {
@@ -39,8 +36,6 @@ const Home = () => {
   useEffect(() => {
     getAllProducts();
   }, [search, category]);
-
-  console.log(maxPrice);
 
   return (
     <>
@@ -89,14 +84,13 @@ const Home = () => {
             </select>
 
             {/* PRICE */}
-            <div className="mb-2 font-semibold">Max Price: $ {maxPrice}</div>
+            <div className="mb-2 font-semibold">Max Price: $</div>
             <input
               type="range"
               min="0"
               max="10000"
               className="range range-primary"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
+          
             />
           </div>
 
