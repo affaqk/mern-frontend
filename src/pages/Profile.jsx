@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = useState();
@@ -40,9 +41,9 @@ const Profile = () => {
 
           <p className="text-gray-600">{user?.email}</p>
 
-          <button className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
+        <Link to = "/update-profile"><button className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
             Update Profile
-          </button>
+          </button> </Link>  
         </div>
       </div>
     </div>

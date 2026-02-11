@@ -15,7 +15,6 @@ const ForgotPassword = () => {
             toast.success("Email sent successfully")
         } catch (error) {
           console.log(error);
-            
         }
     }
 
