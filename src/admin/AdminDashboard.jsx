@@ -1,9 +1,18 @@
-import { Outlet, Link } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import React from "react";
+import cookies from "js-cookie"
 
 const AdminDashboard = () => {
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(()=>{
+    const token = cookies.get("token")
+    if(!token){
+      navigate("/login")
+    }
+  })
 
   return (
     <div className="flex h-screen bg-gray-100">
