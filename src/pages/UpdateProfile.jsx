@@ -104,6 +104,7 @@ const UpdateProfile = () => {
             >
               Update Profile
             </button>
+            
           </div>
         </form>
       </div>

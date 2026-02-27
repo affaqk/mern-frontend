@@ -13,7 +13,7 @@ const Profile = () => {
         },
       );
       console.log(response.data.user);
-      setUser(response.data.user)
+      setUser(response.data.user);
     } catch (error) {
       console.log(error);
     }
@@ -41,9 +41,17 @@ const Profile = () => {
 
           <p className="text-gray-600">{user?.email}</p>
 
-        <Link to = "/update-profile"><button className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
-            Update Profile
-          </button> </Link>  
+          <Link to="/update-profile">
+            <button className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
+              Update Profile
+            </button>
+          </Link>
+          <Link to="/update-password">
+            <button className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
+              Update Profile
+            </button>
+          </Link>
+        
         </div>
       </div>
     </div>
