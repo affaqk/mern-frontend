@@ -14,6 +14,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import AdminDashboard from "./admin/AdminDashboard";
 import ViewAllUsers from "./admin/ViewAllUsers";
 import AdminAllProducts from "./admin/AdminAllProducts";
+import UserProfile2 from "./admin/UserProfile2";
 
 const App = () => {
   return (
@@ -33,8 +34,9 @@ const App = () => {
 
         {/* admin routes  */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
-          <Route path="admin/get-all-users" element={<ViewAllUsers />} />
-          <Route path="admin/get-all-products" element={<AdminAllProducts />} />
+          <Route path="get-all-users" element={<ViewAllUsers />} />
+          <Route path="get-all-products" element={<AdminAllProducts />} />
+          <Route path="user-profile/:id" element={<UserProfile2 />} />
         </Route>
       </Routes>
     </>

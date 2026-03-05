@@ -1,9 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie"
 
 const Profile = () => {
+  const token = Cookies.get("token");
+
+  useEffect(()=>{
+    if(!token){
+      naviagte("/login")
+    }
+  })
   const [user, setUser] = useState();
+  const naviagte = useNavigate()
   const getUserProfile = async () => {
     try {
       const response = await axios.get(
@@ -19,6 +29,19 @@ const Profile = () => {
     }
   };
 
+  const deleteProfile = async () => {
+    try {
+      const response = await axios.delete(
+        "http://localhost:3000/api/v1/users/delete-profile", {
+          withCredentials : true
+        }
+      );
+      toast.success("Profile deleted successfully");
+      naviagte("/")
+    } catch (error) {
+      toast.error(response.data.error.message);
+    }
+  };
   useEffect(() => {
     getUserProfile();
   }, []);
@@ -48,10 +71,15 @@ const Profile = () => {
           </Link>
           <Link to="/update-password">
             <button className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
-              Update Profile
+              Update Password
             </button>
           </Link>
-        
+          <button
+            onClick={deleteProfile}
+            className="mt-4 w-fit px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+          >
+            Delete Profile
+          </button>
         </div>
       </div>
     </div>

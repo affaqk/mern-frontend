@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
+import UserProfile2 from "./UserProfile2";
+import { useNavigate } from "react-router-dom";
 
 const ViewAllUsers = () => {
+  const navigate = useNavigate()
   const [users, setUsers] = useState([]);
 
   const getAllUsers = async () => {
@@ -16,6 +19,7 @@ const ViewAllUsers = () => {
       console.log(error.response?.data);
     }
   };
+
 
   useEffect(() => {
     getAllUsers();
@@ -62,10 +66,9 @@ const ViewAllUsers = () => {
                   {user.role}
                 </span>
               </div>
-
               {/* Action Buttons */}
               <div className="flex gap-2 mt-5">
-                <button className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md text-sm transition">
+                <button onClick={() => navigate(`/admin-dashboard/user-profile/${user._id}`)} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md text-sm transition">
                   View
                 </button>
                 <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md text-sm transition">
