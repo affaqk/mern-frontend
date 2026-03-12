@@ -18,11 +18,11 @@ const Signup = () => {
         "http://localhost:3000/api/v1/users/register-user",
         formData,
       );
-      // console.log(response.data.token);
-      // const token = response.data.token
-      // Cookies.set("token", token, {
-      //     expires : 7
-      // })
+      console.log(response.data.token);
+      const token = response.data.token
+      Cookies.set("token", token, {
+          expires : 7
+      })
       console.log(response.data.user.role);
 
       toast.success("user registered successfully");

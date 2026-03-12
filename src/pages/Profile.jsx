@@ -22,8 +22,9 @@ const Profile = () => {
           withCredentials: true,
         },
       );
-      console.log(response.data.user);
       setUser(response.data.user);
+      console.log(response.data.user.role);
+      
     } catch (error) {
       console.log(error);
     }

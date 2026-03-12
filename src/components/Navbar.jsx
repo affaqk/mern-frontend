@@ -1,10 +1,18 @@
 import axios from "axios";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Cookie from "js-cookie";
+import { useEffect } from "react";
 
 const Navbar = () => {
+  const [token, setToken] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setToken(Cookie.get("token"));
+  }, [location]);
   const logout = async () => {
     try {
       axios.post(
@@ -12,6 +20,8 @@ const Navbar = () => {
         {},
         { withCredentials: true },
       );
+      Cookie.remove("token"); // remove cookie
+      setToken(null);
       toast.success("Logged out successfully");
       navigate("/");
     } catch (error) {
@@ -19,6 +29,9 @@ const Navbar = () => {
       console.log(error);
     }
   };
+
+
+
   return (
     <div className="navbar bg-base-100 shadow-sm p-8">
       <div className="flex-1">
@@ -85,9 +98,15 @@ const Navbar = () => {
             <li>
               <a>Settings</a>
             </li>
-            <li onClick={logout}>
-              <Link to="/login">Logout</Link>
-            </li>
+            {token ? (
+              <li onClick={logout}>
+                <Link>Logout</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

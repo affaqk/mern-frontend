@@ -12,6 +12,8 @@ export default function AdminAllProducts() {
     category: "",
   });
 
+  
+
   const openUpdateModal = (product) => {
     setSelectedProductId(product._id);
     setFormData({

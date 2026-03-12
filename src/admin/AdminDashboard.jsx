@@ -2,16 +2,34 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from "react";
 import cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const token = cookies.get("token");
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
+
+  const getUserProfile = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/v1/users/user-profile",{
+        withCredentials : true
+      })
+      console.log(response.data.user.role);
+      if(response.data.user.role !== "admin"){
+        navigate("/")
+      }
+      
+    } catch (error) {
+      console.log(error);
+      
     }
-  });
+  }
+
+  useEffect(()=>{
+    getUserProfile()
+  },[])
+  
+
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -29,6 +47,9 @@ const AdminDashboard = () => {
         <nav className="mt-4 px-4 space-y-2">
           <Link to="dashboard" className="block p-3 rounded hover:bg-green-300">
             Dashboard
+          </Link>
+          <Link to="add-product" className="block p-3 rounded hover:bg-green-300">
+            Add Product
           </Link>
 
           <Link

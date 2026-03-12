@@ -15,6 +15,7 @@ import AdminDashboard from "./admin/AdminDashboard";
 import ViewAllUsers from "./admin/ViewAllUsers";
 import AdminAllProducts from "./admin/AdminAllProducts";
 import UserProfile2 from "./admin/UserProfile2";
+import AddProduct from "./admin/AddProduct";
 
 const App = () => {
   return (
@@ -37,6 +38,8 @@ const App = () => {
           <Route path="get-all-users" element={<ViewAllUsers />} />
           <Route path="get-all-products" element={<AdminAllProducts />} />
           <Route path="user-profile/:id" element={<UserProfile2 />} />
+          <Route path = "add-product" element = {<AddProduct/>}/>
+
         </Route>
       </Routes>
     </>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import UserProfile2 from "./UserProfile2";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ViewAllUsers = () => {
   const navigate = useNavigate()
@@ -19,6 +20,20 @@ const ViewAllUsers = () => {
       console.log(error.response?.data);
     }
   };
+
+  const deleteUser = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/v1/users/delete-profile/${id}`, {
+        withCredentials : true
+      })
+      toast.success("User deleted successfully")
+       setUsers((prevUsers) =>
+        prevUsers.filter((user) => user._id !== id),
+      );
+    } catch (error) {
+      toast.error(error)
+    }
+  }
 
 
   useEffect(() => {
@@ -71,7 +86,7 @@ const ViewAllUsers = () => {
                 <button onClick={() => navigate(`/admin-dashboard/user-profile/${user._id}`)} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md text-sm transition">
                   View
                 </button>
-                <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md text-sm transition">
+                <button onClick={() => deleteUser(user._id)} className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md text-sm transition">
                   Delete
                 </button>
               </div>
